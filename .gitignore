@@ -1,0 +1,6 @@
+/find_syscall
+/fix_tar
+/pdb_gen
+/pup
+/*.o
+
