@@ -14,6 +14,10 @@ CFLAGS = -Wall -Wextra \
          -Wno-missing-field-initializers
 
 ifeq ($(findstring MINGW, $(shell uname -s)), MINGW)
+  MINGW=1
+endif
+
+ifdef MINGW
 LDLIBS = -lws2_32
 endif
 
