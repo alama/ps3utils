@@ -161,7 +161,7 @@ int main (int argc, char *argv[])
   }
 
 
-  pkg = fopen (argv[1], "r");
+  pkg = fopen (argv[1], "rb");
   if (pkg == NULL) {
     perror ("Failed to open .pkg file : ");
     return -2;
@@ -192,19 +192,19 @@ int main (int argc, char *argv[])
     return -6;
   }
 
-  out1 = fopen ("f0.pdb", "w");
+  out1 = fopen ("f0.pdb", "wb");
   if (out1 == NULL) {
     perror ("Couldn't create f0.pdb : ");
     return -7;
   }
   fclose (out1);
 
-  out1 = fopen ("d0.pdb", "w");
+  out1 = fopen ("d0.pdb", "wb");
   if (out1 == NULL) {
     perror ("Couldn't create d0.pdb : ");
     return -8;
   }
-  out2 = fopen ("d1.pdb", "w");
+  out2 = fopen ("d1.pdb", "wb");
   if (out2 == NULL) {
     perror ("Couldn't create d1.pdb : ");
     fclose (out1);
