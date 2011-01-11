@@ -135,14 +135,16 @@ echo "$VERSION-KaKaRoTo" > "$OUTDIR/version.txt"
 
 cd "$BUILDDIR"
 
-log "Retreiving package build number"
-BUILD_NUMBER=$($PUP i "$INFILE" 2>/dev/null | grep "Image version" | $AWK '{print $3}')
+if [ "x$BUILD_NUMBER" == "x" ]; then
+   log "Retreiving package build number"
+   BUILD_NUMBER=$($PUP i "$INFILE" 2>/dev/null | grep "Image version" | $AWK '{print $3}')
+fi
 
 if [ "x$BUILD_NUMBER" == "x" ]; then
     die "Could not find build number"
 fi
 
-log "Found build number : $BUILD_NUMBER"
+log "Using build number : $BUILD_NUMBER"
 
 log "Creating CFW file"
 $PUP c "$OUTDIR" "$OUTFILE" $BUILD_NUMBER >> "$LOGFILE" 2>&1 || die "Could not Create PUP file"
