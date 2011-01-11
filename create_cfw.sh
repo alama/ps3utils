@@ -131,7 +131,9 @@ $USTARCMD "$OUTDIR/update_files.tar" *.pkg *.img dev_flash3_* dev_flash_*  >> "$
 $FIX_TAR "$OUTDIR/update_files.tar" >> "$LOGFILE" 2>&1 || die "Could not fix update tar file"
 
 VERSION=$(cat "$OUTDIR/version.txt")
-echo "$VERSION-KaKaRoTo" > "$OUTDIR/version.txt"
+if [[ $VERSION != *KaKaRoTo* ]]; then    
+    echo "$VERSION-KaKaRoTo" > "$OUTDIR/version.txt"
+fi
 
 cd "$BUILDDIR"
 

@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <string.h>
+#include <inttypes.h>
 
 #ifdef WIN32
 #include <winsock.h>
@@ -29,7 +30,7 @@
 
 #define VERSION "0.2"
 
-#define PUP_MAGIC (uint64_t) 0x5343455546000000  /* "SCEUF\0\0\0" */
+#define PUP_MAGIC (uint64_t) 0x5343455546000000LLU  /* "SCEUF\0\0\0" */
 
 static const uint8_t hmac_pup_key[] = {
   0xf4, 0x91, 0xad, 0x94, 0xc6, 0x81, 0x10, 0x96,
@@ -128,11 +129,11 @@ static void print_hash (const char *message, uint8_t hash[20])
 static void print_header_info (PUPHeader *header, PUPFooter *footer)
 {
   printf ("PUP file information\n"
-      "Package version: %llu\n"
-      "Image version: %llu\n"
-      "File count: %llu\n"
-      "Header length: %llu\n"
-      "Data length: %llu\n",
+      "Package version: %" PRIu64 "\n"
+      "Image version: %" PRIu64 "\n"
+      "File count: %" PRIu64 "\n"
+      "Header length: %" PRIu64 "\n"
+      "Data length: %" PRIu64 "\n",
       header->package_version, header->image_version,
       header->file_count, header->header_length, header->data_length);
 
@@ -149,7 +150,7 @@ static void print_file_info ( PUPFileEntry *file, PUPHashEntry *hash)
       "\tEntry id: 0x%X\n"
       "\tFilename : %s\n"
       "\tData offset: 0x%X\n"
-      "\tData length: %llu\n",
+      "\tData length: %" PRIu64 "\n",
       (uint32_t) hash->entry_id,  (uint32_t) file->entry_id,
       filename ? filename : "Unknown entry id",
       (uint32_t) file->data_offset, file->data_length);
