@@ -71,8 +71,13 @@ typedef struct
   uint8_t padding[12];
 } PUPFooter;
 
+#ifdef __BIG_ENDIAN__
+#define ntohll(x) (x)
+#define htonll(x) (x)
+#else
 #define ntohll(x) (((uint64_t) ntohl (x) << 32) | (uint64_t) ntohl (x >> 32) )
 #define htonll(x) (((uint64_t) htonl (x) << 32) | (uint64_t) htonl (x >> 32) )
+#endif
 
 static void usage (const char *program)
 {
